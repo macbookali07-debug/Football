@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шейит-Дөбө Arena - Аренда футбольных полей</title>
+    <meta name="description" content="Аренда футбольных полей в г. Ош: расписание, бронирование онлайн и удобная оплата. Football Arena — играйте в любое время!">
+    <meta name="theme-color" content="#2ecc71">
+    <meta property="og:title" content="Football Arena — Аренда футбольных полей">
+    <meta property="og:description" content="Онлайн-бронирование футбольных полей: выбор поля, даты и времени, оплата и расписание.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <a class="skip-link" href="#mainContent">Перейти к содержанию</a>
+    <!-- Экран загрузки -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="football-loader">
+                <div class="ball"></div>
+                <div class="field">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="goal"></div>
+                    <div class="goal"></div>
+                </div>
+                <div class="stars">
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                    <div class="star"></div>
+                </div>
+            </div>
+            <h2 class="loading-title">Шейит-Дөбө Arena</h2>
+            <p class="loading-subtitle">Загрузка лучшего стадиона...</p>
+            <div class="loading-bar">
+                <div class="progress"></div>
+                <div class="progress-glow"></div>
+            </div>
+            <div class="loading-percentage">0%</div>
+        </div>
+        <div class="loading-background">
+            <div class="bg-circle"></div>
+            <div class="bg-circle"></div>
+            <div class="bg-circle"></div>
+            <div class="bg-circle"></div>
+        </div>
+    </div>
+
+    <!-- Анимированные частицы -->
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <a class="logo" href="#home" aria-label="Football Arena — на главную">
+                    <i class="fas fa-futbol"></i>
+                    <span>Шейит-Дөбө Arena</span>
+                    <div class="logo-glow"></div>
+                </a>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="nav-link"><i class="fas fa-home"></i> Главная</a></li>
+                    <li><a href="#fields" class="nav-link"><i class="fas fa-th-large"></i> Поля</a></li>
+                    <li><a href="#schedule" class="nav-link"><i class="fas fa-calendar-alt"></i> Расписание</a></li>
+                    <li><a href="#schedule" class="nav-link"><i class="fas fa-ticket-alt"></i> Бронирование</a></li>
+                    <li><a href="#contacts" class="nav-link"><i class="fas fa-map-marker-alt"></i> Контакты</a></li>
+                </ul>
+                <button class="hamburger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="navMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main id="mainContent" tabindex="-1">
+        <section id="home" class="hero">
+            <div class="hero-background">
+                <div class="hero-circle"></div>
+                <div class="hero-circle"></div>
+                <div class="hero-circle"></div>
+                <div class="hero-circle"></div>
+                <div class="floating-ball"></div>
+                <div class="floating-ball"></div>
+                <div class="floating-ball"></div>
+                
+                <!-- Супер реалистичная анимация футбольного матча -->
+                <div class="football-match">
+                    <!-- Атмосферные эффекты -->
+                    <div class="stadium-lights">
+                        <div class="light-beam"></div>
+                        <div class="light-beam"></div>
+                        <div class="light-beam"></div>
+                        <div class="light-beam"></div>
+                    </div>
+                    
+                    <!-- Трибуны -->
+                    <div class="stands">
+                        <div class="stand left-stand">
+                            <div class="crowd"></div>
+                            <div class="crowd"></div>
+                            <div class="crowd"></div>
+                        </div>
+                        <div class="stand right-stand">
+                            <div class="crowd"></div>
+                            <div class="crowd"></div>
+                            <div class="crowd"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Футбольное поле с текстурой -->
+                    <div class="pitch">
+                        <div class="grass-texture"></div>
+                        <div class="field-lines">
+                            <div class="center-line"></div>
+                            <div class="center-circle"></div>
+                            <div class="penalty-area left"></div>
+                            <div class="penalty-area right"></div>
+                            <div class="goal-area left"></div>
+                            <div class="goal-area right"></div>
+                            <div class="corner-flag left"></div>
+                            <div class="corner-flag right"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Ворота с сеткой -->
+                    <div class="goal left-goal">
+                        <div class="goal-post"></div>
+                        <div class="goal-post"></div>
+                        <div class="goal-crossbar"></div>
+                        <div class="goal-net"></div>
+                    </div>
+                    <div class="goal right-goal">
+                        <div class="goal-post"></div>
+                        <div class="goal-post"></div>
+                        <div class="goal-crossbar"></div>
+                        <div class="goal-net net-shake"></div>
+                    </div>
+                    
+                    <!-- Футболисты с улучшенной анимацией -->
+                    <div class="player player1" data-position="forward">
+                        <div class="player-shadow"></div>
+                        <div class="player-body">
+                            <div class="player-head"></div>
+                            <div class="player-torso">
+                                <div class="jersey-number">10</div>
+                            </div>
+                            <div class="player-arms">
+                                <div class="arm left"></div>
+                                <div class="arm right"></div>
+                            </div>
+                            <div class="player-legs">
+                                <div class="leg left"></div>
+                                <div class="leg right"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="player player2" data-position="midfielder">
+                        <div class="player-shadow"></div>
+                        <div class="player-body">
+                            <div class="player-head"></div>
+                            <div class="player-torso">
+                                <div class="jersey-number">7</div>
+                            </div>
+                            <div class="player-arms">
+                                <div class="arm left"></div>
+                                <div class="arm right"></div>
+                            </div>
+                            <div class="player-legs">
+                                <div class="leg left"></div>
+                                <div class="leg right"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="player player3" data-position="defender">
+                        <div class="player-shadow"></div>
+                        <div class="player-body">
+                            <div class="player-head"></div>
+                            <div class="player-torso">
+                                <div class="jersey-number">4</div>
+                            </div>
+                            <div class="player-arms">
+                                <div class="arm left"></div>
+                                <div class="arm right"></div>
+                            </div>
+                            <div class="player-legs">
+                                <div class="leg left"></div>
+                                <div class="leg right"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="player player4" data-position="goalkeeper">
+                        <div class="player-shadow"></div>
+                        <div class="player-body">
+                            <div class="player-head"></div>
+                            <div class="player-torso">
+                                <div class="jersey-number">1</div>
+                                <div class="goalkeeper-gloves">
+                                    <div class="glove left"></div>
+                                    <div class="glove right"></div>
+                                </div>
+                            </div>
+                            <div class="player-arms">
+                                <div class="arm left"></div>
+                                <div class="arm right"></div>
+                            </div>
+                            <div class="player-legs">
+                                <div class="leg left"></div>
+                                <div class="leg right"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Мяч с реалистичным следом -->
+                    <div class="match-ball">
+                        <div class="ball-shadow"></div>
+                        <div class="ball-pattern"></div>
+                    </div>
+                    
+                    <!-- Эффекты -->
+                    <div class="motion-trail"></div>
+                    <div class="kick-effect"></div>
+                    
+                    <!-- Анимация гола -->
+                    <div class="goal-celebration">
+                        <div class="goal-text">ГОЛ!</div>
+                        <div class="goal-stars">
+                            <div class="goal-star">⭐</div>
+                            <div class="goal-star">⭐</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Счетчик и таймер -->
+                    <div class="score-board">
+                        <div class="score">
+                            <span class="team">Barselona</span>
+                            <span class="goals">3</span>
+                            <span class="separator">-</span>
+                            <span class="goals">2</span>
+                            <span class="team">Real Madrid</span>
+                        </div>
+                        <div class="timer">45:00</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-word">Аренда</span>
+                    <span class="title-word">футбольных</span>
+                    <span class="title-word">полей</span>
+                </h1>
+                <div class="hero-buttons">
+                    <button class="cta-button primary" onclick="scrollToSchedule()">
+                        <i class="fas fa-play"></i>
+                        Забронировать поле
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="fields" class="fields">
+            <div class="container">
+                <h2 class="section-title">Наши поля</h2>
+                <div class="fields-grid">
+                    <div class="field-card" onclick="selectFieldAndOpenBooking('5x5')">
+                        <div class="field-image">
+                            <img src="https://tehno-lok.ru/wp-content/uploads/2020/08/angar52.jpg" alt="Поле 5x5" loading="lazy" decoding="async">
+                            <div class="field-overlay">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="field-info">
+                            <h3>Поле 5x5</h3>
+                            <p>Идеально для малых групп</p>
+                            <div class="field-features">
+                                <span class="feature-badge">Освещение</span>
+                            </div>
+                            <div class="field-price">
+                                <span class="price">1000сом/час</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field-card" onclick="selectFieldAndOpenBooking('8x8')">
+                        <div class="field-image">
+                            <img src="https://findsport.ru/userfiles/images/620x365/1559468889_901587b192981478f646940789c132bf.jpg" alt="Поле 8x8" loading="lazy" decoding="async">
+                            <div class="field-overlay">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                        <div class="field-info">
+                            <h3>Поле 8x8</h3>
+                            <p>Стандартный размер для игры</p>
+                            <div class="field-features">
+                                <span class="feature-badge premium">Премиум</span>
+                            </div>
+                            <div class="field-price">
+                                <span class="price">1500дом/час</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="schedule" class="schedule">
+            <div class="container">
+                <h2 class="section-title">Расписание полей</h2>
+                <div class="schedule-controls">
+                    <div class="control-group">
+                        <label for="scheduleField">Выберите поле:</label>
+                        <select id="scheduleField">
+                            <option value="5x5">Поле 5x5</option>
+                            <option value="8x8">Поле 8x8</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="scheduleDate">Выберите дату:</label>
+                        <input type="date" id="scheduleDate">
+                    </div>
+                    <div class="control-group">
+                        <button class="refresh-btn" onclick="refreshSchedule()">
+                            <i class="fas fa-sync-alt"></i> Обновить
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="schedule-grid">
+                    <div class="schedule-legend">
+                        <div class="legend-item">
+                            <span class="legend-color free"></span>
+                            <span>Свободно</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color booked"></span>
+                            <span>Занято</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color permanent"></span>
+                            <span>Постоянное бронирование</span>
+                        </div>
+                    </div>
+                    
+                    <div class="schedule-table" id="scheduleTable">
+                        <!-- Динамически генерируемая таблица расписания -->
+                    </div>
+                </div>
+                
+                <div class="permanent-bookings">
+                    <h3>Бронирования</h3>
+                    
+                    <!-- Постоянные бронирования (зелёные) -->
+                    <div class="bookings-section">
+                        <h4 style="color: #27ae60; margin-bottom: 12px; font-size: 0.95rem;">Постоянные (еженедельные)</h4>
+                        <div class="permanent-list" id="permanentList">
+                            <!-- Динамически генерируемый список постоянных бронирований -->
+                        </div>
+                    </div>
+                    
+                    <!-- Разовые бронирования (розовые) -->
+                    <div class="bookings-section" style="margin-top: 20px; border-top: 1px solid #f0f0f0; padding-top: 15px;">
+                        <h4 style="color: #e74c3c; margin-bottom: 12px; font-size: 0.95rem;">Разовые (одноразовые)</h4>
+                        <div class="single-bookings-list" id="singleBookingsList">
+                            <!-- Динамически генерируемый список разовых бронирований -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="booking" class="booking">
+            <div class="container">
+                <h2 class="section-title">Бронирование поля</h2>
+                <div class="booking-container">
+                    <div class="booking-form reveal-on-scroll">
+                        <form id="bookingForm">
+                            <div class="form-group">
+                                <label for="bookingType">Тип бронирования:</label>
+                                <select id="bookingType" name="bookingType" required>
+                                    <option value="single">Разовое</option>
+                                    <option value="permanent">Постоянное</option>
+                                </select>
+                            </div>
+                            <div class="form-group" id="permanentOptions" style="display: none;">
+                                <label for="permanentDays">Дни недели:</label>
+                                <div class="days-checkboxes">
+                                    <label><input type="checkbox" name="days" value="monday"> Пн</label>
+                                    <label><input type="checkbox" name="days" value="tuesday"> Вт</label>
+                                    <label><input type="checkbox" name="days" value="wednesday"> Ср</label>
+                                    <label><input type="checkbox" name="days" value="thursday"> Чт</label>
+                                    <label><input type="checkbox" name="days" value="friday"> Пт</label>
+                                    <label><input type="checkbox" name="days" value="saturday"> Сб</label>
+                                    <label><input type="checkbox" name="days" value="sunday"> Вс</label>
+                                </div>
+                                <label for="duration">Длительность (недель):</label>
+                                <select id="duration">
+                                    <option value="4">4 недели</option>
+                                    <option value="8">8 недель</option>
+                                    <option value="12">12 недель</option>
+                                    <option value="24">24 недели</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="field">Выберите поле:</label>
+                                <select id="field" name="field" required>
+                                    <option value="">Выберите поле</option>
+                                    <option value="5x5">Поле 5x5 - 1000с/час</option>
+                                    <option value="8x8">Поле 8x8 - 1500с/час</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="date">Дата:</label>
+                                <input type="date" id="date" name="date" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Выберите время:</label>
+                                <div class="time-slots" id="timeSlots">
+                                    <button type="button" class="time-slot" data-time="08:00" data-price="1000" aria-pressed="false">08:00 - 09:00</button>
+                                    <button type="button" class="time-slot" data-time="09:00" data-price="1000" aria-pressed="false">09:00 - 10:00</button>
+                                    <button type="button" class="time-slot" data-time="10:00" data-price="1000" aria-pressed="false">10:00 - 11:00</button>
+                                    <button type="button" class="time-slot" data-time="11:00" data-price="1000" aria-pressed="false">11:00 - 12:00</button>
+                                    <button type="button" class="time-slot" data-time="12:00" data-price="1000" aria-pressed="false">12:00 - 13:00</button>
+                                    <button type="button" class="time-slot" data-time="13:00" data-price="1000" aria-pressed="false">13:00 - 14:00</button>
+                                    <button type="button" class="time-slot" data-time="14:00" data-price="1000" aria-pressed="false">14:00 - 15:00</button>
+                                    <button type="button" class="time-slot" data-time="15:00" data-price="1000" aria-pressed="false">15:00 - 16:00</button>
+                                    <button type="button" class="time-slot" data-time="16:00" data-price="1000" aria-pressed="false">16:00 - 17:00</button>
+                                    <button type="button" class="time-slot" data-time="17:00" data-price="1000" aria-pressed="false">17:00 - 18:00</button>
+                                    <button type="button" class="time-slot" data-time="18:00" data-price="1000" aria-pressed="false">18:00 - 19:00</button>
+                                    <button type="button" class="time-slot" data-time="19:00" data-price="1000" aria-pressed="false">19:00 - 20:00</button>
+                                    <button type="button" class="time-slot" data-time="20:00" data-price="1000" aria-pressed="false">20:00 - 21:00</button>
+                                    <button type="button" class="time-slot" data-time="21:00" data-price="1000" aria-pressed="false">21:00 - 22:00</button>
+                                    <button type="button" class="time-slot" data-time="22:00" data-price="1000" aria-pressed="false">22:00 - 23:00</button>
+                                    <button type="button" class="time-slot" data-time="23:00" data-price="1000" aria-pressed="false">23:00 - 00:00</button>
+                                </div>
+                                <div class="form-hint" id="timeSlotsHint">Сначала выберите поле и дату, затем время.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Ваше имя:</label>
+                                <input type="text" id="name" name="name" autocomplete="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Телефон:</label>
+                                <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="+996 555 68 55 55" required>
+                            </div>
+                            <div class="booking-summary">
+                                <div class="summary-item">
+                                    <span>Поле:</span>
+                                    <span id="summaryField">-</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Дата:</span>
+                                    <span id="summaryDate">-</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Время:</span>
+                                    <span id="summaryTime">-</span>
+                                </div>
+                                <div class="summary-item total">
+                                    <span>Итого:</span>
+                                    <span id="summaryPrice">0с</span>
+                                </div>
+                            </div>
+                            <button type="submit" id="submitBooking" class="submit-btn" disabled>Перейти к оплате</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacts" class="contacts">
+            <div class="container">
+                <h2 class="section-title">Контакты</h2>
+                <div class="contacts-content">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h3>Адрес</h3>
+                                <p>Кыргызстан, г. Ош, ул. Ахмаджан-Ата, 3/2</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h3>Телефон</h3>
+                                <p>+996 (555) 68-55-55</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h3>Email</h3>
+                                <p>info@footballarena.ru</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h3>Время работы</h3>
+                                <p>Ежедневно 8:00 - 23:00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-container osh">
+                        <div id="map"></div>
+                        <div id="fallbackMap" style="display: none;">
+                            <iframe 
+                                width="100%" 
+                                height="400" 
+                                frameborder="0" 
+                                scrolling="no" 
+                                marginheight="0" 
+                                marginwidth="0" 
+                                loading="lazy"
+                                src="https://yandex.ru/map-widget/v1/?um=constructor%3A40.524412%2C72.798283~40.524412%2C72.798283&l=map&lang=ru_RU">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="logo">
+                        <i class="fas fa-futbol"></i>
+                        <span>Шейит-Дөбө Arena</span>
+                    </div>
+                    <p>Профессиональные футбольные поля для вашей игры</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Быстрые ссылки</h3>
+                    <ul>
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#fields">Поля</a></li>
+                        <li><a href="#schedule">Расписание</a></li>
+                        <li><a href="#schedule">Бронирование</a></li>
+                        <li><a href="#contacts">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p>+996 (555) 68-55-55</p>
+                    <p>info@footballarena.ru</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Шейит-Дөбө Arena. Все права защищены. Elibaev Mukhammed Ali</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Оплата заказа</h2>
+                <span class="close" onclick="closePaymentModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="order-summary">
+                    <h3>Детали заказа</h3>
+                    <div class="summary-item">
+                        <span>Поле:</span>
+                        <span id="paymentField">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Дата:</span>
+                        <span id="paymentDate">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Время:</span>
+                        <span id="paymentTime">-</span>
+                    </div>
+                    <div class="summary-item total">
+                        <span>К оплате:</span>
+                        <span id="paymentPrice">0с</span>
+                    </div>
+                </div>
+                <form id="paymentForm">
+                    <div class="form-group">
+                        <label for="cardNumber">Номер карты:</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cardExpiry">Срок действия:</label>
+                            <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cardCVV">CVV:</label>
+                            <input type="text" id="cardCVV" placeholder="123" maxlength="3" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cardName">Имя владельца:</label>
+                        <input type="text" id="cardName" placeholder="IVAN IVANOV" required>
+                    </div>
+                    <button type="submit" class="pay-btn">Оплатить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="successModal" class="modal">
+        <div class="modal-content success">
+            <div class="success-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Бронирование успешно!</h2>
+            <p>Ваше поле забронировано. Подтверждение отправлено на ваш телефон.</p>
+            <button onclick="closeSuccessModal()" class="close-btn">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- My Bookings Modal -->
+    <div id="myBookingsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Мои бронирования</h2>
+                <span class="close" onclick="closeMyBookingsModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="mbPhone">Введите телефон или имя:</label>
+                    <input type="text" id="mbQuery" placeholder="Например, +996 555 68 55 55 или Иван">
+                </div>
+                <div style="display:flex; gap:12px; align-items:center; margin-bottom:12px;">
+                    <button id="mbSearchBtn" class="submit-btn">Поиск</button>
+                    <button id="mbExportBtn" class="submit-btn">Скачать JSON</button>
+                </div>
+                <div class="mb-results">
+                    <table class="bookings-table" id="mbResultsTable">
+                        <thead>
+                            <tr><th>Дата</th><th>Поле</th><th>Время</th><th>Клиент</th><th>Телефон</th><th>Сумма</th></tr>
+                        </thead>
+                        <tbody id="mbResultsBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="adminPanel" class="admin-panel" hidden>
+        <div class="admin-container">
+            <div class="admin-header">
+                <h2>Админ-панель</h2>
+                <button class="close-admin" onclick="toggleAdminPanel(event)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="admin-tabs">
+                <button class="tab-btn active" onclick="showAdminTab('bookings', event)">Бронирования</button>
+                <button class="tab-btn" onclick="showAdminTab('settings', event)">Настройки</button>
+                <button class="tab-btn" onclick="showAdminTab('export', event)">Экспорт</button>
+            </div>
+            
+            <div id="bookingsTab" class="admin-tab active">
+                <h3>Все бронирования</h3>
+                <div class="bookings-filters">
+                    <input type="text" id="searchBookings" placeholder="Поиск по имени или телефону...">
+                    <select id="filterType">
+                        <option value="all">Все типы</option>
+                        <option value="single">Разовые</option>
+                        <option value="permanent">Постоянные</option>
+                    </select>
+                    <button class="export-btn" onclick="exportBookings()">
+                        <i class="fas fa-download"></i> Экспорт
+                    </button>
+                </div>
+                <div class="bookings-table-container">
+                    <table class="bookings-table" id="bookingsTable">
+                        <thead>
+                            <tr>
+                                <th>Дата</th>
+                                <th>Поле</th>
+                                <th>Время</th>
+                                <th>Клиент</th>
+                                <th>Телефон</th>
+                                <th>Тип</th>
+                                <th>Сумма</th>
+                                <th>Статус</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookingsTableBody">
+                            <!-- Динамически генерируемый список бронирований -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="settingsTab" class="admin-tab">
+                <h3>Настройки</h3>
+                <div class="settings-form">
+                    <div class="setting-group">
+                        <label>Цена за час (5x5):</label>
+                        <input type="number" id="price5x5" value="1000">
+                    </div>
+                    <div class="setting-group">
+                        <label>Цена за час (8x8):</label>
+                        <input type="number" id="price8x8" value="1500">
+                    </div>
+                    <div class="setting-group">
+                        <label>Время работы:</label>
+                        <input type="time" id="workStart" value="08:00">
+                        <input type="time" id="workEnd" value="23:00">
+                    </div>
+                    <button class="save-settings-btn" onclick="saveSettings()">
+                        <i class="fas fa-save"></i> Сохранить
+                    </button>
+                </div>
+            </div>
+            
+            <div id="exportTab" class="admin-tab">
+                <h3>Экспорт данных</h3>
+                <div class="export-options">
+                    <button class="export-option" onclick="exportToJSON()">
+                        <i class="fas fa-file-code"></i> Экспорт в JSON
+                    </button>
+                    <button class="export-option" onclick="exportToCSV()">
+                        <i class="fas fa-file-csv"></i> Экспорт в CSV
+                    </button>
+                    <button class="export-option" onclick="printBookings()">
+                        <i class="fas fa-print"></i> Печать
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtDRaKZbL6Q7m4N3qQ9sR5tU6vW8xY0zA&callback=initMap"></script>
+</body>
+</html>
