@@ -608,26 +608,97 @@
                         <span id="paymentPrice">0с</span>
                     </div>
                 </div>
+                <div class="payment-methods">
+                    <h3>Выберите способ оплаты:</h3>
+                    <div class="payment-options">
+                        <button type="button" class="payment-method active" data-method="card" onclick="selectPaymentMethod('card')">
+                            <i class="fas fa-credit-card"></i>
+                            Банковская карта
+                        </button>
+                        <button type="button" class="payment-method" data-method="mbank" onclick="selectPaymentMethod('mbank')">
+                            <i class="fas fa-mobile-alt"></i>
+                            Мбанк
+                        </button>
+                    </div>
+                </div>
+                
                 <form id="paymentForm">
-                    <div class="form-group">
-                        <label for="cardNumber">Номер карты:</label>
-                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
-                    </div>
-                    <div class="form-row">
+                    <div id="cardPaymentForm">
                         <div class="form-group">
-                            <label for="cardExpiry">Срок действия:</label>
-                            <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" required>
+                            <label for="cardNumber">Номер карты:</label>
+                            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cardExpiry">Срок действия:</label>
+                                <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cardCVV">CVV:</label>
+                                <input type="text" id="cardCVV" placeholder="123" maxlength="3" required>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="cardCVV">CVV:</label>
-                            <input type="text" id="cardCVV" placeholder="123" maxlength="3" required>
+                            <label for="cardName">Имя владельца:</label>
+                            <input type="text" id="cardName" placeholder="IVAN IVANOV" required>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="cardName">Имя владельца:</label>
-                        <input type="text" id="cardName" placeholder="IVAN IVANOV" required>
-                    </div>
-                    <button type="submit" class="pay-btn">Оплатить</button>
+                    
+                    <div id="mbankPaymentForm" style="display: none;">
+                        <div class="mbank-info">
+                            <div class="mbank-logo">
+                                <i class="fas fa-mobile-alt"></i>
+                                <h3>Мбанк</h3>
+                            </div>
+                            <p>Вы будете перенаправлены в приложение Мбанк для завершения оплаты</p>
+                            <div class="mbank-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-phone"></i>
+                                    <span>Номер для перевода: <strong>0705005415</strong></span>
+                                    <button type="button" class="copy-btn" onclick="copyPhoneNumber()">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-money-bill"></i>
+                                    <span>Сумма: <strong id="mbankAmount">0с</strong></span>
+                                </div>
+                            </div>
+                            <div class="mbank-instructions">
+                                <p><strong>Как оплатить:</strong></p>
+                                <ol>
+                                    <li>Откройте приложение Мбанк</li>
+                                    <li>Нажмите "Перевод по номеру"</li>
+                                    <li>Введите номер: <strong>0705005415</strong></li>
+                                    <li>Введите сумму: <strong id="mbankAmount2">0 сом</strong></li>
+                                    <li>Нажмите "Перевести"</li>
+                                </ol>
+                            </div>
+                            <div class="mbank-steps">
+                                <div class="step">
+                                    <span class="step-number">1</span>
+                                    <span>Нажмите "Оплатить через Мбанк"</span>
+                                </div>
+                                <div class="step">
+                                    <span class="step-number">2</span>
+                                    <span>Откроется приложение Мбанк автоматически</span>
+                                </div>
+                                <div class="step">
+                                    <span class="step-number">3</span>
+                                    <span>Переведите сумму и подтвердите оплату</span>
+                                </div>
+                            </div>
+                            <div class="test-payment">
+                                <small>Для тестирования: <button type="button" class="test-btn" onclick="simulateMbankPayment()">Имитировать оплату</button></small>
+                                <br><br>
+                                <button type="button" class="open-mbank-btn" onclick="openMbankApp()">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    Открыть приложение Мбанк
+                                </button>
+                            </div>
+                        </div>
+                    
+                    <button type="submit" class="pay-btn" id="payButton">Оплатить</button>
                 </form>
             </div>
         </div>

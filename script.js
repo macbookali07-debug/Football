@@ -242,14 +242,51 @@ function updateBookingUIState() {
 
 // Инициализация при загрузке страницы
 document.addEventListener('DOMContentLoaded', function() {
-    // Показываем загрузочный экран
+    // Оптимизация для мобильных устройств
+    if (window.innerWidth <= 768) {
+        // Отключаем тяжелые анимации на мобильных
+        document.body.classList.add('mobile-optimized');
+        
+        // Убираем загрузочный экран сразу на мобильных
+        const loadingScreen = document.getElementById('loadingScreen');
+        if (loadingScreen) {
+            loadingScreen.style.display = 'none';
+        }
+        
+        // Оптимизация скролла
+        document.body.style.scrollBehavior = 'smooth';
+        
+        // Предотвращаем двойной тап
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function(e) {
+            const now = Date.now();
+            if (now - lastTouchEnd <= 300) {
+                e.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+        
+        // Оптимизация форм для мобильных
+        const inputs = document.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                // Увеличиваем размер при фокусе
+                setTimeout(() => {
+                    input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300);
+            });
+        });
+    }
+    
+    // Показываем загрузочный экран только на десктопе
     const loadingScreen = document.getElementById('loadingScreen');
-    
-    // Запускаем анимацию подсказок
-    startLoadingTips();
-    
-    // Запускаем анимацию процентов
-    startLoadingPercentage();
+    if (loadingScreen && window.innerWidth > 768) {
+        // Запускаем анимацию подсказок
+        startLoadingTips();
+        
+        // Запускаем анимацию процентов
+        startLoadingPercentage();
+    }
     
     // Инициализация всех модулей
     loadBookingsFromStorage(); // Загружаем сохраненные бронирования
@@ -270,16 +307,18 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Скрываем загрузочный экран после загрузки
     setTimeout(() => {
-        if (loadingScreen) {
+        if (loadingScreen && window.innerWidth > 768) {
             loadingScreen.classList.add('hide');
             setTimeout(() => {
                 loadingScreen.style.display = 'none';
-            }, 1000);
+            }, 500);
         }
         
         // Запускаем анимации появления элементов
-        animateElementsOnLoad();
-    }, 4000); // 4 секунды для полного эффекта
+        if (window.innerWidth > 768) {
+            animateElementsOnLoad();
+        }
+    }, window.innerWidth <= 768 ? 1000 : 4000); // Быстрая загрузка на мобильных
 });
 
 // Анимация подсказок при загрузке
@@ -1320,6 +1359,18 @@ function openPaymentModal() {
     document.getElementById('paymentTime').textContent = document.getElementById('summaryTime').textContent;
     document.getElementById('paymentPrice').textContent = document.getElementById('summaryPrice').textContent;
     
+    // Обновляем сумму в интерфейсе Мбанка
+    const price = document.getElementById('summaryPrice').textContent;
+    const mbankAmount = document.getElementById('mbankAmount');
+    const mbankAmount2 = document.getElementById('mbankAmount2');
+    
+    if (mbankAmount) {
+        mbankAmount.textContent = price;
+    }
+    if (mbankAmount2) {
+        mbankAmount2.textContent = price;
+    }
+    
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
 }
@@ -1328,6 +1379,267 @@ function closePaymentModal() {
     const modal = document.getElementById('paymentModal');
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
+}
+
+// Выбор способа оплаты
+function selectPaymentMethod(method) {
+    // Удаляем активный класс со всех кнопок
+    document.querySelectorAll('.payment-method').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    // Добавляем активный класс на выбранную кнопку
+    document.querySelector(`[data-method="${method}"]`).classList.add('active');
+    
+    // Показываем/скрываем соответствующие формы
+    const cardForm = document.getElementById('cardPaymentForm');
+    const mbankForm = document.getElementById('mbankPaymentForm');
+    const payButton = document.getElementById('payButton');
+    
+    if (method === 'card') {
+        cardForm.style.display = 'block';
+        mbankForm.style.display = 'none';
+        payButton.textContent = 'Оплатить';
+        payButton.onclick = null; // Сбрасываем обработчик клика
+    } else if (method === 'mbank') {
+        cardForm.style.display = 'none';
+        mbankForm.style.display = 'block';
+        payButton.textContent = 'Оплатить через Мбанк';
+        payButton.onclick = function(e) {
+            e.preventDefault();
+            processMbankPayment();
+        };
+        
+        // Обновляем сумму в интерфейсе Мбанка
+        const price = document.getElementById('paymentPrice').textContent;
+        const mbankAmount = document.getElementById('mbankAmount');
+        if (mbankAmount) {
+            mbankAmount.textContent = price;
+        }
+    }
+}
+
+// Функция для копирования номера телефона
+function copyPhoneNumber() {
+    const phoneNumber = '0705005415';
+    
+    // Создаем временный элемент для копирования
+    const tempInput = document.createElement('input');
+    tempInput.value = phoneNumber;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    
+    try {
+        document.execCommand('copy');
+        showNotification('Номер ' + phoneNumber + ' скопирован!', 'success');
+    } catch (err) {
+        showNotification('Не удалось скопировать номер', 'error');
+    }
+    
+    document.body.removeChild(tempInput);
+}
+
+// Функция для прямого открытия приложения Мбанк
+function openMbankApp() {
+    const phoneNumber = '0705005415';
+    const amount = document.getElementById('mbankAmount').textContent.replace('с', '').trim();
+    
+    // Все возможные URL схемы для Мбанка Кыргызстан
+    const mbankUrls = [
+        // Самые распространенные схемы
+        `mbank://payment?phone=${phoneNumber}&amount=${amount}`,
+        `mbank://transfer?phone=${phoneNumber}&amount=${amount}`,
+        `mbank://send?phone=${phoneNumber}&amount=${amount}`,
+        
+        // С доменом kg
+        `mbank.kg://payment?phone=${phoneNumber}&amount=${amount}`,
+        `mbank.kg://transfer?phone=${phoneNumber}&amount=${amount}`,
+        
+        // Альтернативные схемы
+        `mbankkg://payment?phone=${phoneNumber}&amount=${amount}`,
+        `mbankkg://transfer?phone=${phoneNumber}&amount=${amount}`,
+        
+        // Android Intent
+        `intent://payment?phone=${phoneNumber}&amount=${amount}#Intent;scheme=mbank;package=kg.mbank.android;end`,
+        `intent://transfer?phone=${phoneNumber}&amount=${amount}#Intent;scheme=mbank;package=kg.mbank.android;end`,
+        
+        // Универсальные схемы
+        `mbank://open?phone=${phoneNumber}&amount=${amount}`,
+        `mbank://pay?phone=${phoneNumber}&amount=${amount}`,
+        
+        // Если ничего не работает - открываем App Store/Google Play
+        `https://apps.apple.com/app/mbank/id123456789`,
+        `https://play.google.com/store/apps/details?id=kg.mbank.android`
+    ];
+    
+    showNotification('Пробуем открыть приложение Мбанк...', 'info');
+    
+    let urlIndex = 0;
+    const tryOpenMbank = () => {
+        if (urlIndex < mbankUrls.length) {
+            console.log('Пробуем URL:', mbankUrls[urlIndex]);
+            
+            // Создаем невидимый iframe для попытки открытия
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = mbankUrls[urlIndex];
+            document.body.appendChild(iframe);
+            
+            setTimeout(() => {
+                document.body.removeChild(iframe);
+                urlIndex++;
+                
+                // Пробуем следующий URL через 1 секунду
+                if (urlIndex < mbankUrls.length) {
+                    setTimeout(tryOpenMbank, 1000);
+                } else {
+                    showNotification('Пожалуйста, откройте приложение Мбанк вручную', 'warning');
+                }
+            }, 1000);
+        }
+    };
+    
+    tryOpenMbank();
+}
+
+// Функция для имитации оплаты (для тестирования)
+function simulateMbankPayment() {
+    if (window.mbankPaymentCallback) {
+        window.mbankPaymentCallback();
+        delete window.mbankPaymentCallback;
+    }
+}
+
+// Обработка оплаты через Мбанк
+function processMbankPayment() {
+    const payButton = document.getElementById('payButton');
+    const originalText = payButton.textContent;
+    
+    // Получаем данные о заказе
+    const orderData = {
+        field: document.getElementById('paymentField').textContent,
+        date: document.getElementById('paymentDate').textContent,
+        time: document.getElementById('paymentTime').textContent,
+        price: document.getElementById('paymentPrice').textContent,
+        customerName: document.getElementById('name').value,
+        customerPhone: document.getElementById('phone').value
+    };
+    
+    const phoneNumber = '0705005415';
+    const amount = orderData.price.replace('с', '').trim();
+    
+    // Блокируем кнопку и показываем загрузку
+    payButton.disabled = true;
+    payButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Открытие Мбанка...';
+    
+    // Определяем тип устройства
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+        // Для мобильных устройств - сразу открываем приложение Мбанк
+        setTimeout(() => {
+            // URL схемы для открытия приложения Мбанк (Кыргызстан)
+            const mbankUrls = [
+                // Основная схема для приложения Мбанк
+                `mbank://payment?phone=${phoneNumber}&amount=${amount}&description=Аренда поля ${orderData.field} ${orderData.date} ${orderData.time}`,
+                // Альтернативная схема
+                `mbank://transfer?phone=${phoneNumber}&amount=${amount}&description=Аренда поля`,
+                // Для Android - прямой Intent
+                `intent://payment?phone=${phoneNumber}&amount=${amount}&description=Аренда поля#Intent;scheme=mbank;package=kg.mbank.android;end`,
+                // Другая возможная схема
+                `mbankkg://payment?phone=${phoneNumber}&amount=${amount}&description=Аренда поля`,
+                // Универсальная схема
+                `mbank.kg://payment?phone=${phoneNumber}&amount=${amount}&description=Аренда поля`
+            ];
+            
+            let urlIndex = 0;
+            const tryOpenMbank = () => {
+                if (urlIndex < mbankUrls.length) {
+                    // Пытаемся открыть приложение
+                    const link = document.createElement('a');
+                    link.href = mbankUrls[urlIndex];
+                    link.target = '_self';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    urlIndex++;
+                    
+                    // Проверяем, открылось ли приложение (через 1.5 секунды)
+                    setTimeout(() => {
+                        // Если страница все еще активна, пробуем следующий URL
+                        if (!document.hidden && urlIndex < mbankUrls.length) {
+                            tryOpenMbank();
+                        } else if (urlIndex >= mbankUrls.length) {
+                            // Если все URL не сработали
+                            showNotification('Пожалуйста, откройте приложение Мбанк вручную и переведите ' + orderData.price + ' на номер ' + phoneNumber, 'info');
+                            payButton.innerHTML = '<i class="fas fa-clock"></i> Ожидание оплаты...';
+                            setupPaymentTimeout(orderData, phoneNumber, payButton, originalText);
+                        }
+                    }, 1500);
+                }
+            };
+            
+            // Начинаем попытки открытия приложения
+            tryOpenMbank();
+            
+            // Показываем сообщение
+            showNotification('Открываем приложение Мбанк...', 'info');
+            
+            // Устанавливаем ожидание оплаты
+            setTimeout(() => {
+                payButton.innerHTML = '<i class="fas fa-clock"></i> Ожидание оплаты...';
+                setupPaymentTimeout(orderData, phoneNumber, payButton, originalText);
+            }, 2000);
+            
+        }, 1000);
+    } else {
+        // Для десктопа - показываем инструкции
+        setTimeout(() => {
+            showNotification('Пожалуйста, откройте Мбанк на телефоне и переведите ' + orderData.price + ' на номер ' + phoneNumber, 'info');
+            payButton.innerHTML = '<i class="fas fa-clock"></i> Ожидание оплаты...';
+            setupPaymentTimeout(orderData, phoneNumber, payButton, originalText);
+        }, 1000);
+    }
+}
+
+// Функция для установки таймаута оплаты
+function setupPaymentTimeout(orderData, phoneNumber, payButton, originalText) {
+    let paymentTimeout = setTimeout(() => {
+        showNotification('Оплата не получена. Попробуйте еще раз или выберите другой способ оплаты', 'error');
+        payButton.disabled = false;
+        payButton.textContent = originalText;
+    }, 30000); // 30 секунд на оплату
+    
+    // Колбэк для успешной оплаты
+    window.mbankPaymentCallback = function() {
+        clearTimeout(paymentTimeout);
+        
+        payButton.innerHTML = '<i class="fas fa-check"></i> Оплата получена!';
+        
+        setTimeout(() => {
+            const bookingType = document.getElementById('bookingType').value;
+            if (bookingType === 'permanent') {
+                savePermanentBooking();
+            } else {
+                saveSingleBooking();
+            }
+            
+            closePaymentModal();
+            showSuccessModal();
+            
+            document.getElementById('bookingForm').reset();
+            document.querySelectorAll('.time-slot').forEach(slot => {
+                slot.classList.remove('selected');
+            });
+            selectedTimeSlot = null;
+            
+            payButton.disabled = false;
+            payButton.textContent = originalText;
+            
+            showNotification(`Оплата ${orderData.price} на номер ${phoneNumber} успешно получена! Поле забронировано.`, 'success');
+        }, 1000);
+    };
 }
 
 // Форма оплаты
@@ -1347,6 +1659,16 @@ function initPaymentForm() {
 
 // Валидация формы оплаты
 function validatePaymentForm() {
+    // Проверяем, какой способ оплаты выбран
+    const activeMethod = document.querySelector('.payment-method.active');
+    const paymentMethod = activeMethod ? activeMethod.dataset.method : 'card';
+    
+    // Если выбран Мбанк, валидация не нужна для полей карты
+    if (paymentMethod === 'mbank') {
+        return true;
+    }
+    
+    // Для оплаты картой проводим полную валидацию
     const cardNumber = document.getElementById('cardNumber').value;
     const cardExpiry = document.getElementById('cardExpiry').value;
     const cardCVV = document.getElementById('cardCVV').value;
@@ -1395,6 +1717,17 @@ function validateExpiry(expiry) {
 
 // Обработка оплаты
 function processPayment() {
+    // Проверяем, какой способ оплаты выбран
+    const activeMethod = document.querySelector('.payment-method.active');
+    const paymentMethod = activeMethod ? activeMethod.dataset.method : 'card';
+    
+    // Если выбран Мбанк, вызываем соответствующую функцию
+    if (paymentMethod === 'mbank') {
+        processMbankPayment();
+        return;
+    }
+    
+    // Для оплаты картой продолжаем стандартную обработку
     // Показываем индикатор загрузки
     const payBtn = document.querySelector('.pay-btn');
     const originalText = payBtn.textContent;
